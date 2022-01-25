@@ -10,6 +10,14 @@ function cargarEventListeners(){
     listaCursos.addEventListener('click' , agregarCurso)
     carrito.addEventListener('click' , borrarArticuloCarrito)
     vaciarCarrito.addEventListener('click' , vaciarCarro)
+
+    document.addEventListener('DOMContentLoaded' , () => {
+        articulosCarrito = JSON.parse(localStorage.getItem('articulos')) || []
+
+        carritoHTML()
+    })
+
+    
 }
 
 
@@ -31,6 +39,7 @@ function borrarArticuloCarrito (e){
         const idDelProducto = e.target.getAttribute('data-id')
 
      articulosCarrito =  articulosCarrito.filter( articulo =>  articulo.id !== idDelProducto )
+     
 
      carritoHTML()
         
@@ -95,8 +104,16 @@ function carritoHTML (){
            contenedorCarrito.appendChild(row)
     })
 
+ guardadStorage()
+    
+     
     
 }
+
+function guardadStorage(){
+    localStorage.setItem('articulos' , JSON.stringify(articulosCarrito))
+}
+
 
 function limpiarHTML(){
      
@@ -111,5 +128,6 @@ function vaciarCarro(){
 
     limpiarHTML()
 } 
+
 
 
