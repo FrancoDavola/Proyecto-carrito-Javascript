@@ -95,9 +95,9 @@ function carritoHTML (){
            const row = document.createElement('tr')
 
            row.innerHTML = `
-                             <td><img src='${imagen}'></td>
+                             <td><img src='${imagen}' style="width:74px"></td>
                              <td>${titulo}</td>
-                             <td>${precio}</td>
+                             <td>$${calculoPrecio(precio , cantidad)}</td>
                              <td>${cantidad}</td>
                              <td> <a href='#' class= "borrar-curso" data-id= "${id}">X</a></td>`;
 
@@ -129,5 +129,13 @@ function vaciarCarro(){
     limpiarHTML()
 } 
 
+function calculoPrecio(precio , cantidad){
 
+    
+    let Nuevoprecio = precio.slice(1,8)
+        Nuevoprecio = Nuevoprecio.replace(/\./g,""); 
+    let precioFinal =  Number(Nuevoprecio)* Number(cantidad)
+
+        return precioFinal.toLocaleString('de-DE')
+}
 
